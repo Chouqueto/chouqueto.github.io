@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
-    <title>Gridea</title>
-    <updated>2020-10-11T09:33:24.366Z</updated>
+    <title>Chouquet&apos;s Blog</title>
+    <updated>2020-10-11T09:38:00.951Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>好轻松的</subtitle>
     <logo>https://chouqueto.github.io/images/avatar.png</logo>
     <icon>https://chouqueto.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2020, Chouquet&apos;s Blog</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://chouqueto.github.io/post/hello-gridea/</id>
