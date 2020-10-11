@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Gridea | Chouquet&#39;s Blog</title>
+<title>CSP2020J组初赛游记 | Chouquet&#39;s Blog</title>
 <meta name="description" content="好轻松的">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://chouqueto.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://chouqueto.github.io">Chouquet&#39;s Blog</a></h3>
@@ -79,42 +86,50 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: Gridea</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://chouqueto.github.io/post/hello-gridea/">Hello Gridea</a>
-    </h2>
-    <p class="article-meta">
-      2018-12-12
-      
-        <a href="https://chouqueto.github.io/tag/7d5iEkXZF/" class="badge secondary">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+          <article class="article">
+            <h1>CSP2020J组初赛游记</h1>
+            <p class="article-meta">
+              2020-10-11
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="1010">10.10</h2>
+<p>在家里看讲义、狂刷真题……前几天做了洛谷上的模拟题，感觉J组初赛难度应该还好，不会太难（</p>
+<h2 id="1011">10.11</h2>
+<h3 id="上午">上午</h3>
+<p>继续看讲义。</p>
+<h3 id="下午">下午</h3>
+<p>本来认为难度还好的，结果……</p>
+<ul>
+<li>考了逻辑运算？！<s>某老师说绝对不会考的</s></li>
+<li>计算机基础知识居然只考一题（选择第一题）？！</li>
+<li>第二大题后面两小题……</li>
+<li>选择题三道组合数学？！<s>第一道好简单，后面两道数学不及格的我只能靠蒙，关键还蒙对了</s></li>
+</ul>
+<p>感觉自己要退役了QAQ</p>
+<h3 id="晚上">晚上</h3>
+<p>搞whk去了</p>
+<p>OI题库上自测84分，实际大概在80pts左右，有可能80以下。</p>
+<p>未完待续~</p>
 
-    </p>
-    <div class="row">
-      <a href="https://chouqueto.github.io/post/hello-gridea/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
+        <div class="paper" data-aos="fade-in">
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://chouqueto.github.io/images/avatar.png?v=1602413006140" class="no-responsive avatar">
@@ -174,6 +189,7 @@
   </div>
 </div>
 
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -185,6 +201,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'daeb5a6d8e1dfc63d51a',
+        clientSecret: '2d0065eb17377e1e039ed47ed9d967e154dd5a17',
+        repo: 'chouquet.github.io',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
     <title>Chouquet&apos;s Blog</title>
-    <updated>2020-10-11T09:40:16.635Z</updated>
+    <updated>2020-10-11T10:43:59.475Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
@@ -10,4 +10,30 @@
     <logo>https://chouqueto.github.io/images/avatar.png</logo>
     <icon>https://chouqueto.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Chouquet&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[CSP2020J组初赛游记]]></title>
+        <id>https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/</id>
+        <link href="https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/">
+        </link>
+        <updated>2020-10-11T10:42:09.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1010">10.10</h2>
+<p>在家里看讲义、狂刷真题……前几天做了洛谷上的模拟题，感觉J组初赛难度应该还好，不会太难（</p>
+<h2 id="1011">10.11</h2>
+<h3 id="上午">上午</h3>
+<p>继续看讲义。</p>
+<h3 id="下午">下午</h3>
+<p>本来认为难度还好的，结果……</p>
+<ul>
+<li>考了逻辑运算？！<s>某老师说绝对不会考的</s></li>
+<li>计算机基础知识居然只考一题（选择第一题）？！</li>
+<li>第二大题后面两小题……</li>
+<li>选择题三道组合数学？！<s>第一道好简单，后面两道数学不及格的我只能靠蒙，关键还蒙对了</s></li>
+</ul>
+<p>感觉自己要退役了QAQ</p>
+<h3 id="晚上">晚上</h3>
+<p>搞whk去了</p>
+<p>OI题库上自测84分，实际大概在80pts左右，有可能80以下。</p>
+<p>未完待续~</p>
+]]></content>
+    </entry>
 </feed>
