@@ -1,22 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://chouqueto.github.io</id>
-    <title>Chouquet&apos;s Blog</title>
-    <updated>2020-10-17T15:44:06.317Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://chouqueto.github.io"/>
-    <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
-    <subtitle>好轻松的</subtitle>
-    <logo>https://chouqueto.github.io/images/avatar.png</logo>
-    <icon>https://chouqueto.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Chouquet&apos;s Blog</rights>
-    <entry>
-        <title type="html"><![CDATA[求众数（主元素问题）]]></title>
-        <id>https://chouqueto.github.io/post/qiu-zhong-shu-zhu-yuan-su-wen-ti/</id>
-        <link href="https://chouqueto.github.io/post/qiu-zhong-shu-zhu-yuan-su-wen-ti/">
-        </link>
-        <updated>2020-10-12T13:58:05.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="一-问题">一、问题</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>求众数（主元素问题） | Chouquet&#39;s Blog</title>
+<meta name="description" content="好轻松的">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://chouqueto.github.io/favicon.ico?v=1602949443848">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://chouqueto.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://chouqueto.github.io">Chouquet&#39;s Blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>求众数（主元素问题）</h1>
+            <p class="article-meta">
+              2020-10-12
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="一-问题">一、问题</h2>
 <p>在长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 的数列 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> 中找到出现次数超过一半的数（<strong>保证数列中只有一个这样的数</strong>）。</p>
 <h2 id="二-解法">二、解法</h2>
 <h3 id="1最朴素的方法">1.最朴素的方法</h3>
@@ -101,32 +179,138 @@ int main(){
 <h2 id="三-相关题目">三、相关题目</h2>
 <h3 id="洛谷p2397yyy-loves-maths-vi-mode">[洛谷P2397]<a href="https://www.luogu.com.cn/problem/P2397">yyy loves Maths VI (mode)</a></h3>
 <p>主元素问题的模板题。注意内存限制，不能开数组。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CSP2020J组初赛游记]]></title>
-        <id>https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/</id>
-        <link href="https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/">
-        </link>
-        <updated>2020-10-11T10:42:09.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="1010">10.10</h2>
-<p>在家里看讲义、狂刷真题……前几天做了洛谷上的模拟题，感觉J组初赛难度应该还好，不会太难（</p>
-<h2 id="1011">10.11</h2>
-<h3 id="上午">上午</h3>
-<p>继续看讲义。</p>
-<h3 id="下午">下午</h3>
-<p>本来认为难度还好的，结果……</p>
-<ul>
-<li>考了逻辑运算？！<s>某老师说绝对不会考的</s></li>
-<li>计算机基础知识居然只考一题（选择第一题）？！</li>
-<li>第二大题后面两小题……</li>
-<li>选择题三道组合数学？！<s>第一道好简单，后面两道数学不及格的我只能靠蒙，关键还蒙对了</s></li>
-</ul>
-<p>感觉自己要退役了QAQ</p>
-<h3 id="晚上">晚上</h3>
-<p>搞whk去了</p>
-<p>OI题库上自测84分，实际大概在80pts左右，有可能80以下。</p>
-<p>未完待续~</p>
-]]></content>
-    </entry>
-</feed>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/">
+                <h3 class="post-title">
+                  CSP2020J组初赛游记
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://chouqueto.github.io/images/avatar.png?v=1602949443848" class="no-responsive avatar">
+    <div class="text-muted">好轻松的</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/qiu-zhong-shu-zhu-yuan-su-wen-ti/">求众数（主元素问题）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/">CSP2020J组初赛游记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/hello-gridea/">Hello Gridea</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://www.luogu.com.cn/user/207812" target="_blank">Chouquet</a> | <a class="rss" href="https://chouqueto.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'daeb5a6d8e1dfc63d51a',
+        clientSecret: '2d0065eb17377e1e039ed47ed9d967e154dd5a17',
+        repo: 'chouquet.github.io',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
