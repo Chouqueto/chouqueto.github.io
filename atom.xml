@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
     <title>Chouquet&apos;s Blog</title>
-    <updated>2020-10-18T07:36:07.707Z</updated>
+    <updated>2020-10-19T13:19:58.610Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
@@ -188,7 +188,8 @@ int main(){
 <h3 id="晚上">晚上</h3>
 <p>搞whk去了</p>
 <p>OI题库上自测84分，实际大概在80pts左右，有可能80以下。</p>
-<p>未完待续~</p>
+<h3 id="后记">后记</h3>
+<p>初赛81pts（可能是答案记错了，估的果然没错……），我所在的弱省肯定过了。</p>
 ]]></content>
     </entry>
 </feed>
