@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>关于 | Chouquet&#39;s Blog</title>
+<title>UVA246 10-20-30游戏 题解 | Chouquet&#39;s Blog</title>
 <meta name="description" content="好轻松的">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,25 +87,155 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>关于</h1>
+            <h1>UVA246 10-20-30游戏 题解</h1>
             <p class="article-meta">
-              2019-01-25
+              2021-01-03
+              
+                <a href="https://chouqueto.github.io/tag/AjkDs5Wav/" class="badge secondary">
+                  线性表
+                </a>
+              
+                <a href="https://chouqueto.github.io/tag/3qipA9L6ID/" class="badge warning">
+                  模拟
+                </a>
+              
+                <a href="https://chouqueto.github.io/tag/h_a6UKde8/" class="badge success">
+                  算法
+                </a>
+              
+                <a href="https://chouqueto.github.io/tag/a-iGixLCIQ/" class="badge secondary">
+                  OI
+                </a>
               
             </p>
             
             <div class="post-content">
-              <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+              <p>花了近1个半小时写完这道模拟……</p>
+<p>因为既可以把牌放在顶部，又可以把牌放在底部，所以可以将每个牌堆用一个双端队列维护，然后按照题意模拟。但是还要判断循环游戏的情况，而且每一局游戏是由8个双端队列构成的。</p>
+<p>这种情况可以搞成字符串处理，也可以自己手写Hash处理。然而，<strong>map/set中是可以以vector为类型的，而vector是可以直接比较大小的。</strong> 因此在vector中存放双端队列，用map/set记录局面即可。</p>
+<p>代码（ <s>建议谨慎观看以防头晕</s> ）：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;deque&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+typedef std::vector&lt;std::deque&lt;int&gt; &gt; State;
+//用vector表示牌堆，按照先手牌再桌面上的顺序存放
+std::map&lt;State, bool&gt; t;//用map判重
+std::deque&lt;int&gt; hand, pile[7];//hand表示手牌，pile表示7堆牌
+bool record() {//记录局面，如果重复返回0
+    State tmp;
+    tmp.push_back(hand);
+    for (int i = 0; i &lt; 7; i++)
+        tmp.push_back(pile[i]);
+    if (t[tmp])
+        return 0;
+    t[tmp] = 1;
+    return 1;
+}
+bool check(std::deque&lt;int&gt; &amp;q) {//判断是否满足1，2，3条件，不满足返回0
+    if (q.size() &lt; 3)
+        return 0;//这个判断一定要有！（我因为一开始没写这个判断结果调了好长时间）
+    int first = q.front(), last = q.back();
+    q.pop_front(), q.pop_back();
+    if (first + q.front() + last == 10 || first + q.front() + last == 20 || first + q.front() + last == 30) {//1
+        hand.push_back(first);
+        hand.push_back(q.front());
+        hand.push_back(last);
+        q.pop_front();
+        return 1;
+    }
+    if (first + q.back() + last == 10 || first + q.back() + last == 20 || first + q.back() + last == 30) {//2
+        hand.push_back(first);
+        hand.push_back(q.back());
+        hand.push_back(last);
+        q.pop_back();
+        return 1;
+    }
+    q.push_front(first);
+    first = q.back();
+    q.pop_back();
+    //注意还原，下同
+    if (first + q.back() + last == 10 || first + q.back() + last == 20 || first + q.back() + last == 30) {//3
+        hand.push_back(q.back());
+        hand.push_back(first);
+        hand.push_back(last);
+        q.pop_back();
+        return 1;
+    }
+    q.push_back(first), q.push_back(last);
+    return 0;
+}
+int change(int &amp;pos) {//发牌
+    while (pile[pos].empty())
+        pos = (pos + 1) % 7;//找到第一个非空的牌堆
+    pile[pos].push_back(hand.front()), hand.pop_front();//放牌
+    if (!record())
+        return -1;//平局
+    if (pile[pos].size() &gt; 2)
+        while (check(pile[pos]));//题目说了要多次查看
+    if (hand.empty())
+        return 0;//手牌为空就输了
+    return 1;//这个返回值是凑数的，看看就好
+}
+int main() {
+    int card;
+    while (scanf(&quot;%d&quot;, &amp;card) != EOF) {
+        if (!card)
+            break;
+        hand.push_back(card);
+        for (int i = 2; i &lt;= 52; i++) {
+            scanf(&quot;%d&quot;, &amp;card);
+            hand.push_back(card);
+        }
+        for (int i = 0; i &lt; 7; i++)//先发每个牌堆1张牌
+            pile[i].push_back(hand.front()), hand.pop_front();
+        record();//记录初始局面
+        int times = 0, pos = 0;
+        while (1) {
+            bool ok = 1;
+            for (int i = 0; i &lt; 7; i++)
+                if (!pile[i].empty())
+                    ok = 0;//这个才是真正判断赢的
+            if(ok) {
+                printf(&quot;Win : %d\n&quot;, times+7);
+                break;
+            }
+            int c = change(pos);
+            if (c == -1) {
+                printf(&quot;Draw: %d\n&quot;, times+7);//算上前面7次发牌但不算当前这局
+                break;
+            }
+            else if (!c) {
+                printf(&quot;Loss: %d\n&quot;, times + 8);//算上前面7次发牌和当前这局
+                break;
+            }
+            ++times, pos = (pos + 1) % 7;
+        }
+        //清空
+        hand.clear();
+        for (int i = 0; i &lt; 7; i++)
+            pile[i].clear();
+        t.clear();
+    }
+    return 0;
+}
+</code></pre>
 
             </div>
           </article>
         </div>
         <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://chouqueto.github.io/post/luo-gu-p3572-ti-jie-poi2014pta-little-bird/">
+                <h3 class="post-title">
+                  [洛谷P3572题解][POI2014]PTA-Little Bird
+                </h3>
+              </a>
+            </div>
           
         </div>
         
@@ -189,11 +319,11 @@
     </div>
     <div class="row">
       
-        <a href="https://chouqueto.github.io/tag/AjkDs5Wav/" class="badge secondary">
+        <a href="https://chouqueto.github.io/tag/AjkDs5Wav/" class="badge success">
           线性表
         </a>
       
-        <a href="https://chouqueto.github.io/tag/3qipA9L6ID/" class="badge secondary">
+        <a href="https://chouqueto.github.io/tag/3qipA9L6ID/" class="badge warning">
           模拟
         </a>
       
@@ -205,19 +335,19 @@
           OI
         </a>
       
-        <a href="https://chouqueto.github.io/tag/jqRWU5g_i/" class="badge ">
+        <a href="https://chouqueto.github.io/tag/jqRWU5g_i/" class="badge secondary">
           题解
         </a>
       
-        <a href="https://chouqueto.github.io/tag/yFqC09EunX/" class="badge success">
+        <a href="https://chouqueto.github.io/tag/yFqC09EunX/" class="badge secondary">
           单调队列
         </a>
       
-        <a href="https://chouqueto.github.io/tag/SSuzDefLfe/" class="badge ">
+        <a href="https://chouqueto.github.io/tag/SSuzDefLfe/" class="badge secondary">
           动态规划
         </a>
       
-        <a href="https://chouqueto.github.io/tag/lHPgosSAYb/" class="badge ">
+        <a href="https://chouqueto.github.io/tag/lHPgosSAYb/" class="badge success">
           DP
         </a>
       
@@ -225,7 +355,7 @@
           主元素问题
         </a>
       
-        <a href="https://chouqueto.github.io/tag/rHub5cjKo/" class="badge success">
+        <a href="https://chouqueto.github.io/tag/rHub5cjKo/" class="badge secondary">
           游记
         </a>
       
