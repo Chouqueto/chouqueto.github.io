@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
     <title>Chouquet&apos;s Blog</title>
-    <updated>2021-01-26T13:35:12.226Z</updated>
+    <updated>2021-02-09T03:50:45.995Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
@@ -10,6 +10,72 @@
     <logo>https://chouqueto.github.io/images/avatar.png</logo>
     <icon>https://chouqueto.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Chouquet&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[UVA10622 完全P次方数 Perfect P-th Powers 题解]]></title>
+        <id>https://chouqueto.github.io/post/uva10622-wan-quan-p-ci-fang-shu-perfect-p-th-powers-ti-jie/</id>
+        <link href="https://chouqueto.github.io/post/uva10622-wan-quan-p-ci-fang-shu-perfect-p-th-powers-ti-jie/">
+        </link>
+        <updated>2021-02-09T03:50:16.000Z</updated>
+        <content type="html"><![CDATA[<p>第一次写一道被<strong>恶意评分</strong>的紫题的题解QWQ</p>
+<p>看上去本题远没有紫题这么难，对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 质因数分解再输出每个质因数的指数的最大公因数就行了。但是本题有几个坑：</p>
+<ol>
+<li>
+<p>说明一点，本题 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">int</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 范围内的数， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 也是的，而 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">int</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 范围内包含负数！</p>
+</li>
+<li>
+<p>若 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 为负数且能写成 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>b</mi><mi>p</mi></msup></mrow><annotation encoding="application/x-tex">b^p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span></span></span></span></span></span></span></span> 的形式，那么 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 也为负数且 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> 为奇数，否则 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>b</mi><mi>p</mi></msup></mrow><annotation encoding="application/x-tex">b^p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span></span></span></span></span></span></span></span> 为非负数。</p>
+</li>
+</ol>
+<p>所以对于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 为负数的情况，只能先将 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 转为正数，再分解质因数。对于最终的结果，如果它是偶数，就要不断地将它除以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> （相当于底数乘 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> ，指数除以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>）。<strong>但是你以为没了吗？</strong></p>
+<ol start="3">
+<li>对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 取相反数后，此时 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 有范围吗，应当怎么办？</li>
+</ol>
+<p>代码很简单：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+int gcd(int a, int b) {
+    return !b ? a : gcd(b, a % b);
+}
+std::vector&lt;int&gt; a;//a为每个n质因数的指数
+void fj(long long &amp;n) {
+    bool minus = 0;//n是否为负数
+    if (n &lt; 0)
+        minus = 1, n = -n;
+    a.clear();//多组数据，需要清空
+    for (long long i = 2; i * i &lt;= n; i++)
+        if (!(n % i)) {
+            a.resize(a.size() + 1);//先调长度
+            a[a.size() - 1] = 0;//最好置0
+            while (!(n % i))
+                ++a[a.size() - 1], n /= i;
+        }
+    if (n &gt; 1)
+        a.push_back(1);
+    int g = a[0];
+    for (int i = 0; i &lt; a.size(); i++)
+        g = gcd(g, a[i]);//算出最终结果
+    if (minus)
+        while (!(g &amp; 1))
+            g &gt;&gt;= 1;//意义见上
+    printf(&quot;%d\n&quot;, g);
+}
+int main() {
+    long long n;
+    while (scanf(&quot;%lld&quot;, &amp;n) != EOF) {
+        if (!n)
+            break;
+        if (n == 1)
+            puts(&quot;。。。&quot;);
+            //原题中没有n=1的情况，随便输出什么都行
+        else
+            fj(n);
+    }
+    return 0;
+}
+</code></pre>
+<p><s>大概算的上绿题吧（主要是陷阱太多了）</s></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[UVA1395 苗条的生成树 Slim Span 题解]]></title>
         <id>https://chouqueto.github.io/post/uva1395-miao-tiao-de-sheng-cheng-shu-slim-span-ti-jie/</id>

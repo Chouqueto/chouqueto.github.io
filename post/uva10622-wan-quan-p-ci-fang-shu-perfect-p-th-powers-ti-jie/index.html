@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>UVA10622 完全P次方数 Perfect P-th Powers 题解 | Chouquet&#39;s Blog</title>
+<meta name="description" content="好轻松的">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://chouqueto.github.io/favicon.ico?v=1612842640723">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://chouqueto.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://chouqueto.github.io">Chouquet&#39;s Blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>UVA10622 完全P次方数 Perfect P-th Powers 题解</h1>
+            <p class="article-meta">
+              2021-02-09
+              
+            </p>
+            
+            <div class="post-content">
+              <p>第一次写一道被<strong>恶意评分</strong>的紫题的题解QWQ</p>
+<p>看上去本题远没有紫题这么难，对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 质因数分解再输出每个质因数的指数的最大公因数就行了。但是本题有几个坑：</p>
+<ol>
+<li>
+<p>说明一点，本题 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">int</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 范围内的数， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 也是的，而 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">int</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span></span></span></span> 范围内包含负数！</p>
+</li>
+<li>
+<p>若 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 为负数且能写成 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>b</mi><mi>p</mi></msup></mrow><annotation encoding="application/x-tex">b^p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span></span></span></span></span></span></span></span> 的形式，那么 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 也为负数且 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> 为奇数，否则 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>b</mi><mi>p</mi></msup></mrow><annotation encoding="application/x-tex">b^p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span></span></span></span></span></span></span></span> 为非负数。</p>
+</li>
+</ol>
+<p>所以对于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 为负数的情况，只能先将 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 转为正数，再分解质因数。对于最终的结果，如果它是偶数，就要不断地将它除以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> （相当于底数乘 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> ，指数除以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>）。<strong>但是你以为没了吗？</strong></p>
+<ol start="3">
+<li>对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 取相反数后，此时 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 有范围吗，应当怎么办？</li>
+</ol>
+<p>代码很简单：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+int gcd(int a, int b) {
+    return !b ? a : gcd(b, a % b);
+}
+std::vector&lt;int&gt; a;//a为每个n质因数的指数
+void fj(long long &amp;n) {
+    bool minus = 0;//n是否为负数
+    if (n &lt; 0)
+        minus = 1, n = -n;
+    a.clear();//多组数据，需要清空
+    for (long long i = 2; i * i &lt;= n; i++)
+        if (!(n % i)) {
+            a.resize(a.size() + 1);//先调长度
+            a[a.size() - 1] = 0;//最好置0
+            while (!(n % i))
+                ++a[a.size() - 1], n /= i;
+        }
+    if (n &gt; 1)
+        a.push_back(1);
+    int g = a[0];
+    for (int i = 0; i &lt; a.size(); i++)
+        g = gcd(g, a[i]);//算出最终结果
+    if (minus)
+        while (!(g &amp; 1))
+            g &gt;&gt;= 1;//意义见上
+    printf(&quot;%d\n&quot;, g);
+}
+int main() {
+    long long n;
+    while (scanf(&quot;%lld&quot;, &amp;n) != EOF) {
+        if (!n)
+            break;
+        if (n == 1)
+            puts(&quot;。。。&quot;);
+            //原题中没有n=1的情况，随便输出什么都行
+        else
+            fj(n);
+    }
+    return 0;
+}
+</code></pre>
+<p><s>大概算的上绿题吧（主要是陷阱太多了）</s></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://chouqueto.github.io/post/uva1395-miao-tiao-de-sheng-cheng-shu-slim-span-ti-jie/">
+                <h3 class="post-title">
+                  UVA1395 苗条的生成树 Slim Span 题解
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://chouqueto.github.io/images/avatar.png?v=1612842640723" class="no-responsive avatar">
+    <div class="text-muted">好轻松的</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva10622-wan-quan-p-ci-fang-shu-perfect-p-th-powers-ti-jie/">UVA10622 完全P次方数 Perfect P-th Powers 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva1395-miao-tiao-de-sheng-cheng-shu-slim-span-ti-jie/">UVA1395 苗条的生成树 Slim Span 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva246-10-20-30-you-xi-ti-jie/">UVA246 10-20-30游戏 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/luo-gu-p3572-ti-jie-poi2014pta-little-bird/">[洛谷P3572题解][POI2014]PTA-Little Bird</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/qiu-zhong-shu-zhu-yuan-su-wen-ti/">求众数（主元素问题）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/">CSP2020J组初赛游记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/hello-gridea/">Hello Gridea</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://chouqueto.github.io/tag/KL5N3ntwL/" class="badge success">
+          图论
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/BH5BtCVPS4/" class="badge secondary">
+          生成树
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/h_a6UKde8/" class="badge success">
+          算法
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/a-iGixLCIQ/" class="badge ">
+          OI
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/AjkDs5Wav/" class="badge warning">
+          线性表
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/3qipA9L6ID/" class="badge ">
+          模拟
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/jqRWU5g_i/" class="badge ">
+          题解
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/yFqC09EunX/" class="badge secondary">
+          单调队列
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/SSuzDefLfe/" class="badge success">
+          动态规划
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/lHPgosSAYb/" class="badge secondary">
+          DP
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/9mM1YmfX1r/" class="badge warning">
+          主元素问题
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/rHub5cjKo/" class="badge warning">
+          游记
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://www.luogu.com.cn/user/207812" target="_blank">Chouquet</a> | <a class="rss" href="https://chouqueto.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'daeb5a6d8e1dfc63d51a',
+        clientSecret: '2d0065eb17377e1e039ed47ed9d967e154dd5a17',
+        repo: 'chouquet.github.io',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
