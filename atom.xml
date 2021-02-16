@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
     <title>Chouquet&apos;s Blog</title>
-    <updated>2021-02-09T03:52:21.426Z</updated>
+    <updated>2021-02-16T16:27:44.386Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
@@ -10,6 +10,142 @@
     <logo>https://chouqueto.github.io/images/avatar.png</logo>
     <icon>https://chouqueto.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Chouquet&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[UVA1601 万圣节后的早晨 The Morning after Halloween]]></title>
+        <id>https://chouqueto.github.io/post/uva1601-wan-sheng-jie-hou-de-zao-chen-the-morning-after-halloween/</id>
+        <link href="https://chouqueto.github.io/post/uva1601-wan-sheng-jie-hou-de-zao-chen-the-morning-after-halloween/">
+        </link>
+        <updated>2021-02-16T15:53:34.000Z</updated>
+        <content type="html"><![CDATA[<p>第一次做双向BFS的题目，调了两天QAQ。感觉题解都不是很详细，所以自己写一篇题解。</p>
+<p>这道题如果第一次做双向BFS是很不友好的，因为本题有许多技巧。</p>
+<p>按照一般搜索的思路，肯定是把三只鬼的位置放在一个结构体里作为状态。但是这个状态总数是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>16</mn><mo>∗</mo><mn>16</mn><msup><mo>)</mo><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">(16*16)^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> ，数组肯定开不下。这个时候题面就很有用了。题目说在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>子网格中至少有一个障碍格，并且最外面一层是障碍格。说明最多只有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>14</mn><mo>×</mo><mn>14</mn></mrow><annotation encoding="application/x-tex">14 \times 14</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">4</span></span></span></span> 的网格是包含空格的，且 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn></mrow><annotation encoding="application/x-tex">4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> 个空格里有一个障碍。所以空格总数就最多是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>14</mn><mo>×</mo><mn>14</mn><mo>×</mo><mn>75</mn><mi mathvariant="normal">%</mi><mo>=</mo><mn>147</mn></mrow><annotation encoding="application/x-tex">14 \times 14 \times 75 \%=147</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord">7</span><span class="mord">5</span><span class="mord">%</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">4</span><span class="mord">7</span></span></span></span> 了。</p>
+<p>可是空格并不是都在一起的，它们有可能很分散。所以还是要开状态总数是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>16</mn><mo>×</mo><mn>16</mn><msup><mo>)</mo><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">(16 \times 16)^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> 的数组记录。为了真正地节约空间，干脆给每个空格一个编号，用这个编号表示空格。如果有空格与这个空格相连，就给这两个空格加一条边。这里的原图是字符矩阵的形式，所以<strong>用不了前向星</strong> （自己没写出来，如果能写出来欢迎大佬指正），只有用vector或类似的形式存：</p>
+<pre><code class="language-cpp">struct Point {
+    int x, y;
+} node[259];
+//node[i]存放编号为i的空格的位置
+const int dx[] = {-1, 0, 1, 0, 0}
+const int dy[] = {0, 1, 0, -1, 0};
+//每一步鬼可以不走，所以有5种状态
+
+//读入
+getchar();//读'\n'用的
+for (int j = 1; j &lt;= w; j++)
+    if (c[i][j] != '#') {
+        id[i][j] = ++cnt;
+        //id[i][j]表示空格(i,j)的编号
+        node[cnt] = (Point){i, j};
+        if (c[i][j] &gt;= 'a' &amp;&amp; c[i][j] &lt;= 'z')
+            st[c[i][j] - 'a'] = id[i][j];//初始位置
+        else if (c[i][j] &gt;= 'A' &amp;&amp; c[i][j] &lt;= 'Z')
+            ed[c[i][j] - 'A'] = id[i][j];//结束位置
+    }
+    
+//存图
+std::vector&lt;int&gt; e[151];
+for (int i = 1; i &lt;= cnt; i++) {
+    e[i].clear();
+    for (int j = 0; j &lt; 5; j++)
+        if (c[node[i].x + dx[j]][node[i].y + dy[j]] != '#')
+            e[i].push_back(id[node[i].x + dx[j]][node[i].y + dy[j]]);
+}
+</code></pre>
+<p>其实还没完。样例中会出现 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">&lt;3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 只鬼的情况，比如只有一只鬼，编号为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> 。这样就不能直接在BFS时判断了。所以需要对缺少的鬼添加一个“虚结点”。这个结点不存在于原图中，而且每次保证不移动鬼。</p>
+<pre><code class="language-cpp">//仿照代码仓库写的，因为比较简洁
+if (n &lt;= 2) {
+    ++cnt, e[cnt].push_back(cnt);
+    st[2] = ed[2] = cnt;//加c的虚结点
+}
+if (n &lt;= 1)
+    ++cnt, e[cnt].push_back(cnt);
+    st[1] = ed[1] = cnt;//加b的虚结点
+</code></pre>
+<p>终于能安心地BFS了。用单向BFS在3s内是能过的，但如果想在1s内过就只能对BFS优化了。**如果原题能用BFS且知道起点与终点，就可以用双向BFS来优化。**双向BFS就是开两个队列，只要在两个队列至少有一个不为空的情况下，分别从起点和终点同时搜索，当出现交集时退出。</p>
+<p>具体看代码框架：</p>
+<pre><code class="language-cpp">queue&lt;int&gt; q[2];//0表示正向的，1表示反向的
+int vis[MAXN];
+//1表示在正向搜索时访问到，2表示反向时访问到
+
+vis[起始状态]=1,vis[终止状态]=2;
+q[0].push(起始状态),q[1].push(终止状态);
+while(!q[0].empty()||!q[1].empty()){
+    int l[2];
+    for(int i=0;i&lt;2;i++)
+        l[i]=q[i].size();
+    //不能直接用q[i].size()，因为要拓展当前一层
+    for(pos=0;pos&lt;2;pos++)
+        while(l[pos]--){
+            tmp=q[pos].front();
+            q[pos].pop();
+            对状态进行拓展{
+                nt=新状态
+                if(!vis[nt])
+                    q[pos].push(nt),...(其他操作);
+                else if(vis[nt]==2-pos){
+                    //被相反方向访问过
+                    return 要求的值
+                }
+            }
+        }
+}
+</code></pre>
+<p>因为上面添加了不移动的状态，所以只需要枚举当前结点的所有邻接点就行。其他细节见代码：</p>
+<pre><code class="language-cpp">struct State {
+    int A, B, C;//用int类型代码更短
+};
+bool check(int &amp;a, int &amp;na, int &amp;b, int &amp;nb) {
+    return (na == nb) || a == nb &amp;&amp; b == na;
+    /*
+    na为a的邻接点，nb为b的邻接点
+    na==nb对应着占用同一个位置的情况，
+    a==nb&amp;&amp;b==na对应着在一步之内交换位置的情况
+    */
+}
+int dis[151][151][151], vis[151][151][151];
+int bfs() {
+    std::queue&lt;State&gt; q[2];
+    memset(dis, 0, sizeof dis);
+    memset(vis, 0, sizeof vis);
+    dis[st[0]][st[1]][st[2]] = 0;
+    dis[ed[0]][ed[1]][ed[2]] = 0;
+    vis[st[0]][st[1]][st[2]] = 1;
+    vis[ed[0]][ed[1]][ed[2]] = 2;
+    q[0].push((State){st[0], st[1], st[2]});
+    q[1].push((State){ed[0], ed[1], ed[2]});
+    while (!q[0].empty() || !q[1].empty()) {
+        int l[2], pos;
+        l[0] = q[0].size(), l[1] = q[1].size();
+        for (pos = 0; pos &lt; 2; pos++)
+            while (l[pos]--) {
+                State tmp = q[pos].front();
+                q[pos].pop();
+                for (int i = 0; i &lt; e[tmp.A].size(); i++) {//a的邻接点
+                    int na = e[tmp.A][i];
+                    for (int j = 0; j &lt; e[tmp.B].size(); j++) {//b的邻接点
+                        int nb = e[tmp.B][j];
+                        if (check(tmp.A, na, tmp.B, nb))
+                            continue;
+                        for (int k = 0; k &lt; e[tmp.C].size(); k++) {//c的邻接点
+                            int nc = e[tmp.C][k];
+                            if (check(tmp.A, na, tmp.C, nc) || check(tmp.B, nb, tmp.C, nc))
+                                continue;
+                            if (!vis[na][nb][nc]) {
+                                dis[na][nb][nc] = dis[tmp.A][tmp.B][tmp.C] + 1;
+                                vis[na][nb][nc] = pos + 1;
+                                q[pos].push((State){na, nb, nc});
+                            }
+                            else if (vis[na][nb][nc] == 2 - pos)
+                                return dis[tmp.A][tmp.B][tmp.C] + 1 + dis[na][nb][nc];//加上从a,b,c到na,nb,nc的一步
+                        }
+                    }
+                }
+            }
+    }
+}
+</code></pre>
+<p>完整代码不贴了。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[UVA10622 完全P次方数 Perfect P-th Powers 题解]]></title>
         <id>https://chouqueto.github.io/post/uva10622-wan-quan-p-ci-fang-shu-perfect-p-th-powers-ti-jie/</id>
