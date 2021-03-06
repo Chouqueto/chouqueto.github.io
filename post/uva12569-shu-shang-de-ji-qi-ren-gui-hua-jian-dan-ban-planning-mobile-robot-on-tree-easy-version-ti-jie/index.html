@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>UVA12569 树上的机器人规划（简单版） Planning mobile robot on Tree (EASY Version) 题解 | Chouquet&#39;s Blog</title>
+<meta name="description" content="好轻松的">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://chouqueto.github.io/favicon.ico?v=1615042331613">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://chouqueto.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://chouqueto.github.io">Chouquet&#39;s Blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>UVA12569 树上的机器人规划（简单版） Planning mobile robot on Tree (EASY Version) 题解</h1>
+            <p class="article-meta">
+              2021-03-06
+              
+            </p>
+            
+            <div class="post-content">
+              <p>做的第二道Ru Jia Liu's Present系列里的题目，感觉这个系列里的题目不是难就是烦人……</p>
+<p>这个也许算是系列中简单的题目之一了（<s>尽管我RE了很多次</s>），只能用普通BFS求解。虽然题目时限是10s，但是暴力做肯定会超时，因为BFS当中存重复状态的数组，如果用map/set表示的话就太慢了。</p>
+<p>如果用一个数组 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>s</mi><mi>u</mi><mi>s</mi><mi>e</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">isuse[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 位的状态，0表示空位、1表示石头、2表示机器人呢？在存状态时就可以看作一个三进制数来用数组存，可惜这个三进制数最大（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>211111111111110</mn></mrow><annotation encoding="application/x-tex">211111111111110</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span></span></span></span>）大概是一千多万（十进制），数组大小依然有点危险。</p>
+<p>所以只能用二进制存了，每位为1表示有机器人或石头，0表示有空位。但要再开一维表示机器人的位置，这样就不爆空间了。</p>
+<p>但还要输出路径。代码仓库里是用位运算提取出不同的两位，但我太弱了想不到这个QAQ。我是将每个状态用一个不相同的编号 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">id</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span> 表示，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>u</mi><mi>e</mi><mi>v</mi><mi>e</mi><mo>[</mo><mi>i</mi><mi>d</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">mueve[id]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mclose">]</span></span></span></span> 表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">id</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span> 这个状态的移动方法，这样递归输出时就只用考虑 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">id</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span> 了。</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+struct State {
+    int dep, robot_pos, isuse, id;
+    //dep表示步数，isuse表示状态
+} start;
+struct Move {
+    int from, to;
+} mueve[500003];//亲测开到这么大能过
+std::queue&lt;State&gt; q;
+bool vis[17][32771];//存状态
+std::vector&lt;int&gt; e[17];//这里用vector存图
+int fa[500003];//fa[id]是id的前驱节点
+int T, n, m, s, t, ID;//ID是编号的最大值
+void print(int st) {//输出路径
+    std::vector&lt;int&gt; nodes;
+    while (fa[st] != -1) {
+        nodes.push_back(st);
+        st = fa[st];
+    }
+    for (int i = nodes.size() - 1; i &gt;= 0; i--)
+        printf(&quot;%d %d\n&quot;, mueve[nodes[i]].from, mueve[nodes[i]].to);
+}
+void bfs(int s, int t) {
+    while (!q.empty()) {
+        State tmp = q.front();
+        q.pop();
+        if (tmp.robot_pos == t) {
+            printf(&quot;%d\n&quot;, tmp.dep);
+            print(tmp.id);
+            return;
+        }
+        for (int i = 1; i &lt;= n; i++)
+            if (tmp.isuse &amp; (1 &lt;&lt; i - 1))
+                for (int j = 0; j &lt; e[i].size(); j++)
+                    if (!(tmp.isuse &amp; (1 &lt;&lt; e[i][j] - 1))) {
+                        State x = tmp;
+                        x.isuse &amp;= ~(1 &lt;&lt; i - 1), x.isuse |= (1 &lt;&lt; e[i][j] - 1);//移动
+                        if (i == tmp.robot_pos)
+                            x.robot_pos = e[i][j];
+                        if (!vis[x.robot_pos][x.isuse]) {
+                            vis[x.robot_pos][x.isuse] = 1;//第二次RE原因：看错变量，里面写错了
+                            x.dep = tmp.dep + 1;
+                            fa[x.id = ++ID] = tmp.id;//赋编号
+                            mueve[ID] = (Move){i, e[i][j]};
+                            q.push(x);
+                        }
+                    }
+    }
+    puts(&quot;-1&quot;);//记得加上
+}
+int main() {
+    scanf(&quot;%d&quot;, &amp;T);
+    for (int cas = 1; cas &lt;= T; cas++) {
+        memset(vis, 0, sizeof vis);
+        memset(fa, -1, sizeof fa);//这个很重要
+        memset(mueve, 0, sizeof mueve);
+        for (int i = 0; i &lt; 17; i++)
+            e[i].clear();
+        while (!q.empty())
+            q.pop();
+        //上面是初始化
+        scanf(&quot;%d%d%d%d&quot;, &amp;n, &amp;m, &amp;s, &amp;t);
+        start.robot_pos = s, start.isuse = 0;
+        start.isuse |= (1 &lt;&lt; s - 1);//一定要算上这个
+        for (int i = 1; i &lt;= m; i++) {
+            int x;
+            scanf(&quot;%d&quot;, &amp;x);
+            start.isuse |= (1 &lt;&lt; x - 1);
+        }
+        for (int i = 1; i &lt; n; i++) {
+            int u, v;
+            scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+            e[u].push_back(v), e[v].push_back(u);
+        }
+        ID = 0;//第一次RE原因：没加这个
+        start.dep = 0, start.id = ++ID;
+        printf(&quot;Case %d: &quot;, cas);
+        vis[s][start.isuse] = 1, q.push(start);
+        bfs(s, t);
+    }
+    return 0;
+}
+</code></pre>
+<p><s>写死我了</s></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://chouqueto.github.io/post/uva1601-wan-sheng-jie-hou-de-zao-chen-the-morning-after-halloween/">
+                <h3 class="post-title">
+                  UVA1601 万圣节后的早晨 The Morning after Halloween
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://chouqueto.github.io/images/avatar.png?v=1615042331613" class="no-responsive avatar">
+    <div class="text-muted">好轻松的</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva12569-shu-shang-de-ji-qi-ren-gui-hua-jian-dan-ban-planning-mobile-robot-on-tree-easy-version-ti-jie/">UVA12569 树上的机器人规划（简单版） Planning mobile robot on Tree (EASY Version) 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva1601-wan-sheng-jie-hou-de-zao-chen-the-morning-after-halloween/">UVA1601 万圣节后的早晨 The Morning after Halloween</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva10622-wan-quan-p-ci-fang-shu-perfect-p-th-powers-ti-jie/">UVA10622 完全P次方数 Perfect P-th Powers 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva1395-miao-tiao-de-sheng-cheng-shu-slim-span-ti-jie/">UVA1395 苗条的生成树 Slim Span 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva246-10-20-30-you-xi-ti-jie/">UVA246 10-20-30游戏 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/luo-gu-p3572-ti-jie-poi2014pta-little-bird/">[洛谷P3572题解][POI2014]PTA-Little Bird</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/qiu-zhong-shu-zhu-yuan-su-wen-ti/">求众数（主元素问题）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/">CSP2020J组初赛游记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/hello-gridea/">Hello Gridea</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://chouqueto.github.io/tag/5Zp8rT-9D/" class="badge secondary">
+          数论
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/GBiNVdOAgB/" class="badge secondary">
+          唯一分解定理
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/h_a6UKde8/" class="badge secondary">
+          算法
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/a-iGixLCIQ/" class="badge warning">
+          OI
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/KL5N3ntwL/" class="badge warning">
+          图论
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/BH5BtCVPS4/" class="badge warning">
+          生成树
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/AjkDs5Wav/" class="badge warning">
+          线性表
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/3qipA9L6ID/" class="badge ">
+          模拟
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/jqRWU5g_i/" class="badge success">
+          题解
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/yFqC09EunX/" class="badge success">
+          单调队列
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/SSuzDefLfe/" class="badge secondary">
+          动态规划
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/lHPgosSAYb/" class="badge success">
+          DP
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/9mM1YmfX1r/" class="badge secondary">
+          主元素问题
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/rHub5cjKo/" class="badge secondary">
+          游记
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://www.luogu.com.cn/user/207812" target="_blank">Chouquet</a> | <a class="rss" href="https://chouqueto.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'daeb5a6d8e1dfc63d51a',
+        clientSecret: '2d0065eb17377e1e039ed47ed9d967e154dd5a17',
+        repo: 'chouquet.github.io',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

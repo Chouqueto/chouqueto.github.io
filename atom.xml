@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
     <title>Chouquet&apos;s Blog</title>
-    <updated>2021-02-16T16:27:44.386Z</updated>
+    <updated>2021-03-06T14:52:15.226Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
@@ -10,6 +10,107 @@
     <logo>https://chouqueto.github.io/images/avatar.png</logo>
     <icon>https://chouqueto.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Chouquet&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[UVA12569 树上的机器人规划（简单版） Planning mobile robot on Tree (EASY Version) 题解]]></title>
+        <id>https://chouqueto.github.io/post/uva12569-shu-shang-de-ji-qi-ren-gui-hua-jian-dan-ban-planning-mobile-robot-on-tree-easy-version-ti-jie/</id>
+        <link href="https://chouqueto.github.io/post/uva12569-shu-shang-de-ji-qi-ren-gui-hua-jian-dan-ban-planning-mobile-robot-on-tree-easy-version-ti-jie/">
+        </link>
+        <updated>2021-03-06T14:51:43.000Z</updated>
+        <content type="html"><![CDATA[<p>做的第二道Ru Jia Liu's Present系列里的题目，感觉这个系列里的题目不是难就是烦人……</p>
+<p>这个也许算是系列中简单的题目之一了（<s>尽管我RE了很多次</s>），只能用普通BFS求解。虽然题目时限是10s，但是暴力做肯定会超时，因为BFS当中存重复状态的数组，如果用map/set表示的话就太慢了。</p>
+<p>如果用一个数组 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>s</mi><mi>u</mi><mi>s</mi><mi>e</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">isuse[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span> 表示第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 位的状态，0表示空位、1表示石头、2表示机器人呢？在存状态时就可以看作一个三进制数来用数组存，可惜这个三进制数最大（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>211111111111110</mn></mrow><annotation encoding="application/x-tex">211111111111110</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span></span></span></span>）大概是一千多万（十进制），数组大小依然有点危险。</p>
+<p>所以只能用二进制存了，每位为1表示有机器人或石头，0表示有空位。但要再开一维表示机器人的位置，这样就不爆空间了。</p>
+<p>但还要输出路径。代码仓库里是用位运算提取出不同的两位，但我太弱了想不到这个QAQ。我是将每个状态用一个不相同的编号 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">id</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span> 表示，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>u</mi><mi>e</mi><mi>v</mi><mi>e</mi><mo>[</mo><mi>i</mi><mi>d</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">mueve[id]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mclose">]</span></span></span></span> 表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">id</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span> 这个状态的移动方法，这样递归输出时就只用考虑 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">id</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span></span></span></span> 了。</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+struct State {
+    int dep, robot_pos, isuse, id;
+    //dep表示步数，isuse表示状态
+} start;
+struct Move {
+    int from, to;
+} mueve[500003];//亲测开到这么大能过
+std::queue&lt;State&gt; q;
+bool vis[17][32771];//存状态
+std::vector&lt;int&gt; e[17];//这里用vector存图
+int fa[500003];//fa[id]是id的前驱节点
+int T, n, m, s, t, ID;//ID是编号的最大值
+void print(int st) {//输出路径
+    std::vector&lt;int&gt; nodes;
+    while (fa[st] != -1) {
+        nodes.push_back(st);
+        st = fa[st];
+    }
+    for (int i = nodes.size() - 1; i &gt;= 0; i--)
+        printf(&quot;%d %d\n&quot;, mueve[nodes[i]].from, mueve[nodes[i]].to);
+}
+void bfs(int s, int t) {
+    while (!q.empty()) {
+        State tmp = q.front();
+        q.pop();
+        if (tmp.robot_pos == t) {
+            printf(&quot;%d\n&quot;, tmp.dep);
+            print(tmp.id);
+            return;
+        }
+        for (int i = 1; i &lt;= n; i++)
+            if (tmp.isuse &amp; (1 &lt;&lt; i - 1))
+                for (int j = 0; j &lt; e[i].size(); j++)
+                    if (!(tmp.isuse &amp; (1 &lt;&lt; e[i][j] - 1))) {
+                        State x = tmp;
+                        x.isuse &amp;= ~(1 &lt;&lt; i - 1), x.isuse |= (1 &lt;&lt; e[i][j] - 1);//移动
+                        if (i == tmp.robot_pos)
+                            x.robot_pos = e[i][j];
+                        if (!vis[x.robot_pos][x.isuse]) {
+                            vis[x.robot_pos][x.isuse] = 1;//第二次RE原因：看错变量，里面写错了
+                            x.dep = tmp.dep + 1;
+                            fa[x.id = ++ID] = tmp.id;//赋编号
+                            mueve[ID] = (Move){i, e[i][j]};
+                            q.push(x);
+                        }
+                    }
+    }
+    puts(&quot;-1&quot;);//记得加上
+}
+int main() {
+    scanf(&quot;%d&quot;, &amp;T);
+    for (int cas = 1; cas &lt;= T; cas++) {
+        memset(vis, 0, sizeof vis);
+        memset(fa, -1, sizeof fa);//这个很重要
+        memset(mueve, 0, sizeof mueve);
+        for (int i = 0; i &lt; 17; i++)
+            e[i].clear();
+        while (!q.empty())
+            q.pop();
+        //上面是初始化
+        scanf(&quot;%d%d%d%d&quot;, &amp;n, &amp;m, &amp;s, &amp;t);
+        start.robot_pos = s, start.isuse = 0;
+        start.isuse |= (1 &lt;&lt; s - 1);//一定要算上这个
+        for (int i = 1; i &lt;= m; i++) {
+            int x;
+            scanf(&quot;%d&quot;, &amp;x);
+            start.isuse |= (1 &lt;&lt; x - 1);
+        }
+        for (int i = 1; i &lt; n; i++) {
+            int u, v;
+            scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+            e[u].push_back(v), e[v].push_back(u);
+        }
+        ID = 0;//第一次RE原因：没加这个
+        start.dep = 0, start.id = ++ID;
+        printf(&quot;Case %d: &quot;, cas);
+        vis[s][start.isuse] = 1, q.push(start);
+        bfs(s, t);
+    }
+    return 0;
+}
+</code></pre>
+<p><s>写死我了</s></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[UVA1601 万圣节后的早晨 The Morning after Halloween]]></title>
         <id>https://chouqueto.github.io/post/uva1601-wan-sheng-jie-hou-de-zao-chen-the-morning-after-halloween/</id>
