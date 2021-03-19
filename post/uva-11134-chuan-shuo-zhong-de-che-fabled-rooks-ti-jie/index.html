@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>UVA 11134 传说中的车 Fabled Rooks 题解 | Chouquet&#39;s Blog</title>
+<meta name="description" content="好轻松的">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://chouqueto.github.io/favicon.ico?v=1616153331212">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://chouqueto.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://chouqueto.github.io">Chouquet&#39;s Blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>UVA 11134 传说中的车 Fabled Rooks 题解</h1>
+            <p class="article-meta">
+              2021-03-19
+              
+            </p>
+            
+            <div class="post-content">
+              <p>按照常规思路，一定是分解成两个一维问题：使 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>∼</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">1 \sim n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> 中每个数都在唯一的区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[l,r]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">]</span></span></span></span> 中（每个区间只能包含一个数）。如果一个车的横坐标能像上面一样做，纵坐标也能像上面那样做，那么这个车一定是符合题目要求的。</p>
+<p>之后的贪心策略不好想。也许你会想要按照 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 从大到小排序，再用一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 的倒序扫描完成问题：</p>
+<pre><code class="language-cpp">bool cmp (Seg a, Seg b) {
+    if (a.r == b.r)
+        return a.l &lt; b.l;
+    return a.r &gt; b.r;
+}
+std::sort(a + 1, a + 1 + n, cmp);
+int i = n, j = 1;
+while (i &gt;= 1 &amp;&amp; j &lt;= n) {
+    if (a[j].l &lt;= i &amp;&amp; i &lt;= a[j].r)
+         rook[a[j].id] = i--;
+     ++j;
+}
+if (i &gt;= 1)
+     return false;
+else
+    return true;
+</code></pre>
+<p>但对下面两个数据，无论 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 怎么排都会输出错误结果，因为这不能保证一遍扫描时就能确定每个坐标：</p>
+<pre><code>#1:
+[1,3],[1,3],[2,2]
+#2:
+[1,1],[3,4],[1,3],[2,3]
+</code></pre>
+<p>既然这样不行，那可以再尝试按照 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 从小到大排序， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span> 相同时 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 从小到大排序，坐标从小到大扫描。这样对于每个坐标都可以选取占据空间尽量小的位置，让后面尽量都能选。这个也会遇到和上面同样的问题，所以需要用 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 算法，对于每个坐标都找所有的区间，第一个找到的区间就能包含它。用上面的方法，当横纵坐标都能找到时就说明有一组解。</p>
+<pre><code class="language-cpp">struct Seg {
+    int l, r, id;//id表示这个区间是第几个输入的
+};
+bool cmp(Seg a, Seg b) {
+    if (a.r == b.r)
+        return a.l &lt; b.l;
+    return a.r &lt; b.r;
+}
+int n;
+bool vis[5003];
+bool work(Seg a[], int rook[]) {//rook[id]表示区间id包含的坐标
+    std::sort(a + 1, a + 1 + n, cmp);
+    memset(vis, 0, sizeof vis);//用vis[id]表示区间id是否已用过
+    int i = 1;
+    while (i &lt;= n) {
+        bool found = 0;//found表示是否找到
+        for (int j = 1; j &lt;= n; j++)
+            if (a[j].l &lt;= i &amp;&amp; i &lt;= a[j].r &amp;&amp; !vis[a[j].id]) {
+                found = 1;
+                rook[a[j].id] = i++, vis[a[j].id] = 1;
+                break;
+            }
+        if (!found)
+            return 0;
+    }
+    return 1;
+}
+</code></pre>
+<p>完整代码不贴了。</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://chouqueto.github.io/post/uva12569-shu-shang-de-ji-qi-ren-gui-hua-jian-dan-ban-planning-mobile-robot-on-tree-easy-version-ti-jie/">
+                <h3 class="post-title">
+                  UVA12569 树上的机器人规划（简单版） Planning mobile robot on Tree (EASY Version) 题解
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://chouqueto.github.io/images/avatar.png?v=1616153331212" class="no-responsive avatar">
+    <div class="text-muted">好轻松的</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva-11134-chuan-shuo-zhong-de-che-fabled-rooks-ti-jie/">UVA 11134 传说中的车 Fabled Rooks 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva12569-shu-shang-de-ji-qi-ren-gui-hua-jian-dan-ban-planning-mobile-robot-on-tree-easy-version-ti-jie/">UVA12569 树上的机器人规划（简单版） Planning mobile robot on Tree (EASY Version) 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva1601-wan-sheng-jie-hou-de-zao-chen-the-morning-after-halloween/">UVA1601 万圣节后的早晨 The Morning after Halloween</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva10622-wan-quan-p-ci-fang-shu-perfect-p-th-powers-ti-jie/">UVA10622 完全P次方数 Perfect P-th Powers 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva1395-miao-tiao-de-sheng-cheng-shu-slim-span-ti-jie/">UVA1395 苗条的生成树 Slim Span 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/uva246-10-20-30-you-xi-ti-jie/">UVA246 10-20-30游戏 题解</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/luo-gu-p3572-ti-jie-poi2014pta-little-bird/">[洛谷P3572题解][POI2014]PTA-Little Bird</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/qiu-zhong-shu-zhu-yuan-su-wen-ti/">求众数（主元素问题）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/csp2020j-zu-chu-sai-you-ji/">CSP2020J组初赛游记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://chouqueto.github.io/post/about/">关于</a>
+            </li>
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://chouqueto.github.io/tag/5Zp8rT-9D/" class="badge warning">
+          数论
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/GBiNVdOAgB/" class="badge ">
+          唯一分解定理
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/h_a6UKde8/" class="badge secondary">
+          算法
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/a-iGixLCIQ/" class="badge warning">
+          OI
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/KL5N3ntwL/" class="badge warning">
+          图论
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/BH5BtCVPS4/" class="badge ">
+          生成树
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/AjkDs5Wav/" class="badge secondary">
+          线性表
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/3qipA9L6ID/" class="badge secondary">
+          模拟
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/jqRWU5g_i/" class="badge ">
+          题解
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/yFqC09EunX/" class="badge secondary">
+          单调队列
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/SSuzDefLfe/" class="badge secondary">
+          动态规划
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/lHPgosSAYb/" class="badge ">
+          DP
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/9mM1YmfX1r/" class="badge warning">
+          主元素问题
+        </a>
+      
+        <a href="https://chouqueto.github.io/tag/rHub5cjKo/" class="badge ">
+          游记
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://www.luogu.com.cn/user/207812" target="_blank">Chouquet</a> | <a class="rss" href="https://chouqueto.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'daeb5a6d8e1dfc63d51a',
+        clientSecret: '2d0065eb17377e1e039ed47ed9d967e154dd5a17',
+        repo: 'chouquet.github.io',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
