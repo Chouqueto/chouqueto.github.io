@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
     <title>Chouquet&apos;s Blog</title>
-    <updated>2021-03-20T02:47:20.996Z</updated>
+    <updated>2021-05-14T09:52:19.783Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
@@ -10,6 +10,45 @@
     <logo>https://chouqueto.github.io/images/avatar.png</logo>
     <icon>https://chouqueto.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Chouquet&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[UVA10886 标准差 Standard Deviation 题解]]></title>
+        <id>https://chouqueto.github.io/post/uva10886-biao-zhun-chai-standard-deviation-ti-jie/</id>
+        <link href="https://chouqueto.github.io/post/uva10886-biao-zhun-chai-standard-deviation-ti-jie/">
+        </link>
+        <updated>2021-05-14T09:51:55.000Z</updated>
+        <content type="html"><![CDATA[<p>因为要计算平均数和方差，所以需要算出每个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">x_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，那么时间复杂度最少是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 的。既然最少是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 的，那么就直接与给定的公式和程序，先算出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">x_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> ，再算出来方差就行了。</p>
+<p>注意如果不知道方差的话，一定要看英文题面，题面给的关于方差的式子其实是方差的平方。</p>
+<p>代码：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+unsigned long long seed;
+long double gen() {
+    static const long double Z = ( long double )1.0 / (1LL&lt;&lt;32);
+    seed &gt;&gt;= 16;
+    seed &amp;= ( 1ULL &lt;&lt; 32 ) - 1;
+    seed *= seed;
+    return seed * Z;
+}
+int T, n;
+long double a[10000003], m, s;
+//s表示方差，注意都要用long double
+int main() {
+    scanf(&quot;%d&quot;, &amp;T);
+    for (int cas = 1; cas &lt;= T; cas++) {
+        scanf(&quot;%d%llu&quot;, &amp;n, &amp;seed);
+        m = 0.0, s = 0.0;//记得初始化
+        for (int i = 1; i &lt;= n; i++)
+            a[i] = gen(), m += a[i];
+        m /= n;
+        for (int i = 1; i &lt;= n; i++)
+            s += (a[i] - m) * (a[i] - m);
+        printf(&quot;Case #%d: %.5Lf\n&quot;, cas, (long double)sqrt(s / n));
+    }
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[UVA 11134 传说中的车 Fabled Rooks 题解]]></title>
         <id>https://chouqueto.github.io/post/uva-11134-chuan-shuo-zhong-de-che-fabled-rooks-ti-jie/</id>
