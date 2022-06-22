@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chouqueto.github.io</id>
     <title>Chouquet&apos;s Blog</title>
-    <updated>2022-05-22T12:16:58.729Z</updated>
+    <updated>2022-06-22T13:55:14.432Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chouqueto.github.io"/>
     <link rel="self" href="https://chouqueto.github.io/atom.xml"/>
@@ -10,6 +10,63 @@
     <logo>https://chouqueto.github.io/images/avatar.png</logo>
     <icon>https://chouqueto.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, Chouquet&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[字符串的最小表示法]]></title>
+        <id>https://chouqueto.github.io/post/zi-fu-chuan-de-zui-xiao-biao-shi-fa/</id>
+        <link href="https://chouqueto.github.io/post/zi-fu-chuan-de-zui-xiao-biao-shi-fa/">
+        </link>
+        <updated>2022-06-22T13:30:00.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-应用">一、应用</h2>
+<p>当题目中出现“环形字符串”等情景时，可以利用字符串的最小表示法来将不同形式的字符串变为一个字符串，这样方便使用Hash等。</p>
+<h2 id="二-算法">二、算法</h2>
+<p>设字符串为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 。</p>
+<ul>
+<li>将 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 复制一份，接到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 后面，记为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>S</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">S&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> .</li>
+<li>双指针。记两指针分别为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i,j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span> ，比较到了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>+</mo><mi>k</mi><mo separator="true">,</mo><mi>j</mi><mo>+</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">i+k,j+k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 位。（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i,j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span> 初始不相同，且一直都不相同）</li>
+<li>如果 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>S</mi><mrow><mi>i</mi><mo>+</mo><mi>k</mi></mrow><mo mathvariant="normal">′</mo></msubsup><mo>&gt;</mo><msubsup><mi>S</mi><mrow><mi>j</mi><mo>+</mo><mi>k</mi></mrow><mo mathvariant="normal">′</mo></msubsup></mrow><annotation encoding="application/x-tex">S&#x27;_{i+k} &gt; S&#x27;_{j + k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.093331em;vertical-align:-0.34143899999999994em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4168920000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.34143899999999994em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1711079999999998em;vertical-align:-0.4192159999999999em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4168920000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4192159999999999em;"><span></span></span></span></span></span></span></span></span></span> ，说明以 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>S</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi>S</mi><mrow><mi>i</mi><mo>+</mo><mi>k</mi></mrow></msub></mrow><annotation encoding="application/x-tex">S_i, S_{i+1}, \dotsb , S_{i+k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.891661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span> 开头都不可能是最小表示法，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 更新为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>+</mo><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+k+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>S</mi><mrow><mi>i</mi><mo>+</mo><mi>k</mi></mrow><mo mathvariant="normal">′</mo></msubsup><mo>&lt;</mo><msubsup><mi>S</mi><mrow><mi>j</mi><mo>+</mo><mi>k</mi></mrow><mo mathvariant="normal">′</mo></msubsup></mrow><annotation encoding="application/x-tex">S&#x27;_{i+k} &lt; S&#x27;_{j+k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.093331em;vertical-align:-0.34143899999999994em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4168920000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.34143899999999994em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1711079999999998em;vertical-align:-0.4192159999999999em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4168920000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4192159999999999em;"><span></span></span></span></span></span></span></span></span></span> 同理。</li>
+</ul>
+<h2 id="三-代码">三、代码</h2>
+<p>以acwing158为例（模板题）：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define min(a, b) ((a) &lt; (b) ? (a) : (b))
+#define MAXN 1000000
+char s[(MAXN &lt;&lt; 1) + 3], t[(MAXN &lt;&lt; 1) + 3];
+int l;
+int minimize(char *s, int n) {
+    int i = 0, j = 1, k;
+    while (i &lt;= n &amp;&amp; j &lt;= n) {
+        for (k = 0; k &lt;= n &amp;&amp; s[i + k] == s[j + k]; k++);
+        if (k == n) break;
+        if (s[i + k] &gt; s[j + k]) {
+            i = i + k + 1;
+            if (i == j) ++i;
+        }
+        else {
+            j = j + k + 1;
+            if (i == j) ++j;
+        }
+    }
+    return min(i, j);
+}
+int main() {
+    scanf(&quot;%s%s&quot;, s, t), l = strlen(s);
+    for (int i = 0; i &lt; l; i++) s[i + l] = s[i];
+    for (int i = 0; i &lt; l; i++) t[i + l] = t[i];
+    int pos1 = minimize(s, l), pos2 = minimize(t, l);
+    bool ok = 1;
+    for (int i = 0; i &lt; l; i++)
+        if (s[pos1 + i] != t[pos2 + i]) {
+            ok = 0;break;
+        }
+    puts(ok ? &quot;Yes&quot; : &quot;No&quot;);
+    if (ok)
+        for (int i = 0; i &lt; l; i++) putchar(s[pos1 + i]);
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[【题解】[USACO17FEB]Why Did the Cow Cross the Road III G]]></title>
         <id>https://chouqueto.github.io/post/ti-jie-usaco17febwhy-did-the-cow-cross-the-road-iii-g/</id>
@@ -753,124 +810,6 @@ int main () {
             puts(&quot;-1&quot;);
         else
             printf(&quot;%d\n&quot;, ans);
-    }
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[UVA246 10-20-30游戏 题解]]></title>
-        <id>https://chouqueto.github.io/post/uva246-10-20-30-you-xi-ti-jie/</id>
-        <link href="https://chouqueto.github.io/post/uva246-10-20-30-you-xi-ti-jie/">
-        </link>
-        <updated>2021-01-03T07:26:05.000Z</updated>
-        <content type="html"><![CDATA[<p>花了近1个半小时写完这道模拟……</p>
-<p>因为既可以把牌放在顶部，又可以把牌放在底部，所以可以将每个牌堆用一个双端队列维护，然后按照题意模拟。但是还要判断循环游戏的情况，而且每一局游戏是由8个双端队列构成的。</p>
-<p>这种情况可以搞成字符串处理，也可以自己手写Hash处理。然而，<strong>map/set中是可以以vector为类型的，而vector是可以直接比较大小的。</strong> 因此在vector中存放双端队列，用map/set记录局面即可。</p>
-<p>代码（ <s>建议谨慎观看以防头晕</s> ）：</p>
-<pre><code class="language-cpp">#include &lt;cstdio&gt;
-#include &lt;deque&gt;
-#include &lt;vector&gt;
-#include &lt;map&gt;
-typedef std::vector&lt;std::deque&lt;int&gt; &gt; State;
-//用vector表示牌堆，按照先手牌再桌面上的顺序存放
-std::map&lt;State, bool&gt; t;//用map判重
-std::deque&lt;int&gt; hand, pile[7];//hand表示手牌，pile表示7堆牌
-bool record() {//记录局面，如果重复返回0
-    State tmp;
-    tmp.push_back(hand);
-    for (int i = 0; i &lt; 7; i++)
-        tmp.push_back(pile[i]);
-    if (t[tmp])
-        return 0;
-    t[tmp] = 1;
-    return 1;
-}
-bool check(std::deque&lt;int&gt; &amp;q) {//判断是否满足1，2，3条件，不满足返回0
-    if (q.size() &lt; 3)
-        return 0;//这个判断一定要有！（我因为一开始没写这个判断结果调了好长时间）
-    int first = q.front(), last = q.back();
-    q.pop_front(), q.pop_back();
-    if (first + q.front() + last == 10 || first + q.front() + last == 20 || first + q.front() + last == 30) {//1
-        hand.push_back(first);
-        hand.push_back(q.front());
-        hand.push_back(last);
-        q.pop_front();
-        return 1;
-    }
-    if (first + q.back() + last == 10 || first + q.back() + last == 20 || first + q.back() + last == 30) {//2
-        hand.push_back(first);
-        hand.push_back(q.back());
-        hand.push_back(last);
-        q.pop_back();
-        return 1;
-    }
-    q.push_front(first);
-    first = q.back();
-    q.pop_back();
-    //注意还原，下同
-    if (first + q.back() + last == 10 || first + q.back() + last == 20 || first + q.back() + last == 30) {//3
-        hand.push_back(q.back());
-        hand.push_back(first);
-        hand.push_back(last);
-        q.pop_back();
-        return 1;
-    }
-    q.push_back(first), q.push_back(last);
-    return 0;
-}
-int change(int &amp;pos) {//发牌
-    while (pile[pos].empty())
-        pos = (pos + 1) % 7;//找到第一个非空的牌堆
-    pile[pos].push_back(hand.front()), hand.pop_front();//放牌
-    if (!record())
-        return -1;//平局
-    if (pile[pos].size() &gt; 2)
-        while (check(pile[pos]));//题目说了要多次查看
-    if (hand.empty())
-        return 0;//手牌为空就输了
-    return 1;//这个返回值是凑数的，看看就好
-}
-int main() {
-    int card;
-    while (scanf(&quot;%d&quot;, &amp;card) != EOF) {
-        if (!card)
-            break;
-        hand.push_back(card);
-        for (int i = 2; i &lt;= 52; i++) {
-            scanf(&quot;%d&quot;, &amp;card);
-            hand.push_back(card);
-        }
-        for (int i = 0; i &lt; 7; i++)//先发每个牌堆1张牌
-            pile[i].push_back(hand.front()), hand.pop_front();
-        record();//记录初始局面
-        int times = 0, pos = 0;
-        while (1) {
-            bool ok = 1;
-            for (int i = 0; i &lt; 7; i++)
-                if (!pile[i].empty())
-                    ok = 0;//这个才是真正判断赢的
-            if(ok) {
-                printf(&quot;Win : %d\n&quot;, times+7);
-                break;
-            }
-            int c = change(pos);
-            if (c == -1) {
-                printf(&quot;Draw: %d\n&quot;, times+7);//算上前面7次发牌但不算当前这局
-                break;
-            }
-            else if (!c) {
-                printf(&quot;Loss: %d\n&quot;, times + 8);//算上前面7次发牌和当前这局
-                break;
-            }
-            ++times, pos = (pos + 1) % 7;
-        }
-        //清空
-        hand.clear();
-        for (int i = 0; i &lt; 7; i++)
-            pile[i].clear();
-        t.clear();
     }
     return 0;
 }
